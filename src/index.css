@@ -1,0 +1,19 @@
+* {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+textarea {
+  height: 8rem;
+}
