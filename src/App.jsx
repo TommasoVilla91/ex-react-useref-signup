@@ -11,6 +11,9 @@ function App() {
   const [description, setDescription] = useState("");
 
   const specializations = ["Full Stack", "Frontend", "Backend"];
+  const letters = "abcdefghijklmnopqrstuvwxyz";
+  const numbers = "0123456789";
+  const symbols = "!@#$%^&*()-_=+[]{}|;:',.<>?/`~";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,6 +56,12 @@ function App() {
               value={user}
               onChange={(e) => setUser(e.target.value)} 
             />
+            <p 
+              className="validation"
+              style={{color: user.length < 6 || [...symbols].some(char => user.includes(char)) ? "red" : "green"}}
+            >
+              {user.length < 6 || [...symbols].some(char => user.includes(char)) ? "Username deve contenere solo caratteri alfanumerici e almeno 6 caratteri" : "così va bene"}
+            </p>
           </div>
 
           <div className="col">
@@ -62,6 +71,12 @@ function App() {
               value={password}
               onChange={(e) => setPassword(e.target.value)} 
             />
+            <p 
+              className="validation"
+              style={{color: password.length >= 8 && [...password].some(char => (symbols && letters && numbers).includes(char)) ? "green" : "red"}}
+            >
+              {password.length >= 8 && [...password].some(char => (symbols && letters && numbers).includes(char)) ? "così va bene" : "Deve contenere almeno 8 caratteri, 1 lettera, 1 numero e 1 simbolo"}
+            </p>
           </div>
 
           <div className="col">
@@ -89,12 +104,18 @@ function App() {
           </div>
 
           <div className="col">
-            <label htmlFor="">Breve descrizione sullo sviluppatore</label>
+            <label htmlFor="">Breve descrizione</label>
             <textarea 
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             >
             </textarea>
+            <p 
+              className="validation" 
+              style={{color: (description.trim()).length >= 100 && (description.trim()).length <= 1000 ? "green" : "red"}}
+            >
+              {(description.trim()).length >= 100 && (description.trim()).length <= 1000 ? "così va bene" : "Deve contenere tra 100 e 1000 caratteri"}
+            </p>
           </div>
 
           <div className="col">

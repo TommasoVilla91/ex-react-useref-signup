@@ -17,3 +17,7 @@ form {
 textarea {
   height: 8rem;
 }
+
+.validation {
+  font-size: 0.8rem;
+}
