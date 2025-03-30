@@ -3,20 +3,26 @@ import { useState, useRef } from "react"
 
 function App() {
 
-  const [name, setName] = useState("");
+  const nameRef = useRef();
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [selectedSpec, setSelectedSpec] = useState("");
-  const [expYears, setExpYears] = useState("");
-  const [description, setDescription] = useState("");
+  const specRef = useRef();
+  const expRef = useRef();
+  const [description, setDescription] = useState("")
 
   const specializations = ["Full Stack", "Frontend", "Backend"];
   const letters = "abcdefghijklmnopqrstuvwxyz";
   const numbers = "0123456789";
   const symbols = "!@#$%^&*()-_=+[]{}|;:',.<>?/`~";
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const name = nameRef.current.value;
+    const selectedSpec = specRef.current.value;
+    const expYears = expRef.current.value;
+
     if(!name || !user || !password || !description) {
       alert("Tutti i campi devono essere compilati")
     } else if(expYears < 0 || isNaN(expYears)) {
@@ -42,11 +48,7 @@ function App() {
 
           <div className="col">
             <label htmlFor="">Nome completo</label>
-            <input 
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+            <input type="text" ref={nameRef}/>
           </div>
 
           <div className="col">
@@ -60,7 +62,7 @@ function App() {
               className="validation"
               style={{color: user.length < 6 || [...symbols].some(char => user.includes(char)) ? "red" : "green"}}
             >
-              {user.length < 6 || [...symbols].some(char => user.includes(char)) ? "Username deve contenere solo caratteri alfanumerici e almeno 6 caratteri" : "così va bene"}
+              {user.length < 6 || [...symbols].some(char => user.includes(char)) ? "Deve contenere solo caratteri alfanumerici e almeno 6 caratteri" : "così va bene"}
             </p>
           </div>
 
@@ -81,35 +83,22 @@ function App() {
 
           <div className="col">
             <label>Specializzazione</label>
-            <select value={selectedSpec} onChange={(e) => setSelectedSpec(e.target.value)}>
+            <select ref={specRef}>
               <option value="">Seleziona una specializzazione</option>
               {specializations.map((s, i) => (
-                <option 
-                  key={i} 
-                  value={s}
-                >
-                  {s}
-                </option>
+                <option key={i} value={s}>{s}</option>
               ))}
             </select>
           </div>
 
           <div className="col">
             <label htmlFor="">Anni di esperienza</label>
-            <input 
-              type="number"
-              value={expYears}
-              onChange={(e) => setExpYears(e.target.value)} 
-            />
+            <input type="number"ref={expRef}/>
           </div>
 
           <div className="col">
             <label htmlFor="">Breve descrizione</label>
-            <textarea 
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            >
-            </textarea>
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
             <p 
               className="validation" 
               style={{color: (description.trim()).length >= 100 && (description.trim()).length <= 1000 ? "green" : "red"}}
