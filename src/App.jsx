@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 
 
 function App() {
@@ -39,7 +39,20 @@ function App() {
         Descrizione: ${description}
       `)
     };    
-  };  
+  };
+  
+  const handleReset = () => {
+    setUser("");
+    setPassword("");
+    setDescription("");
+    nameRef.current.value = "";
+    specRef.current.value = "";
+    expRef.current.value = "";
+  }
+  
+  useEffect(() => {
+    nameRef.current.focus();
+  }, [])
 
   return (
     <main>
@@ -109,8 +122,10 @@ function App() {
 
           <div className="col">
             <button type="submit">Invia</button>
+            <button onClick={handleReset}>Reset</button>
           </div>
         </form>
+        
       </section>
     </main>
   )
