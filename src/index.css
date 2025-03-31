@@ -21,3 +21,13 @@ textarea {
 .validation {
   font-size: 0.8rem;
 }
+
+.top-teleport {
+  position: fixed;
+  bottom: 6rem;
+  right: 20px;
+}
+
+.spacer {
+  height: 100vh;
+}

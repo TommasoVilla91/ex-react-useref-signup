@@ -15,6 +15,9 @@ function App() {
   const numbers = "0123456789";
   const symbols = "!@#$%^&*()-_=+[]{}|;:',.<>?/`~";
 
+  ////// MILESTONE 2 correzione
+  // non fare validazione nell'html nel return come creare funzione qui con useMemo
+  // e inserire queste validazioni anche nell'if di handleSubmit
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -124,9 +127,14 @@ function App() {
             <button type="submit">Invia</button>
             <button onClick={handleReset}>Reset</button>
           </div>
-        </form>
-        
+        </form>              
       </section>
+
+      {/* ///// BONUS correzione ultimo punto */}
+      <div>
+        <button className="top-teleport" onClick={() => nameRef.current.scrollIntoView({behavior: "smooth"})}>Torna su</button>
+      </div>
+      <div className="spacer"></div>
     </main>
   )
 }
